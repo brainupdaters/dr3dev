@@ -103,6 +103,9 @@ if [ -f ${HOME}/go/dr3env.ghuser ]; then
 			git config url."https://${user}@github.com".InsteadOf "https://github.com"
 			git remote rename origin upstream
 			git remote add origin https://github.com/${user}/${repo}
+			if [ ! "$(git branch --list master)" ]; then
+				git checkout -b master
+			fi
 			git flow init -d 1> /dev/null
 			git checkout develop
 			if [ "$repo" != "drlm-testing" ] && [ "$repo" != "drlm-plugins" ]; then
