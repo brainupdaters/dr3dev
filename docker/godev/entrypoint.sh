@@ -19,7 +19,7 @@ echo "#####################"
 if [ -f "$HOME"/dots/custom/init.vim ]; then
 	mkdir -p ${HOME}/.config/nvim; ln -s ${HOME}/dots/custom/init.vim ${HOME}/.config/nvim/init.vim
 else
-	[ -f "$HOME"/dots/nvim/init.vim ] && mkdir -p ${HOME}/.config/nvim; ln -s ${HOME}/dots/nvim/init.vim ${HOME}/.config/nvim/init.vim
+	[ -f "$HOME"/dots/nvim/init.vim ] && mkdir -p ${HOME}/.config/nvim && ln -s ${HOME}/dots/nvim/init.vim ${HOME}/.config/nvim/init.vim
 	[ -f "$HOME"/dots/nvim/coc-settings.json ] && ln -s ${HOME}/dots/nvim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
 fi
 
@@ -34,10 +34,6 @@ fi
 [ -f "$HOME"/dots/bash/inputrc ] &&  ln -sf ${HOME}/dots/bash/inputrc ${HOME}/.inputrc;
 [ -d "$HOME"/dots/bash ] && ln -sf ${HOME}/dots/bash ${HOME}/.bash
 [ -f "$HOME"/dots/code/settings.json ] && mkdir -p "${HOME}/.config/Code - OSS/User" && ln -sf ${HOME}/dots/code/settings.json "${HOME}/.config/Code - OSS/User/settings.json"
-
-touch ${HOME}/.bash_history
-
-#export GO111MODULE=on
 
 if [ ! -f "$HOME/go/offline" ]; then
 	if [ ! -d "$HOME"/.vim/plugged/vim-go ]; then
@@ -63,7 +59,6 @@ if [ ! -f "$HOME/go/offline" ]; then
 	# Install VSCode extensions
 		code --install-extension ms-vscode.Go
 		code --install-extension lextudio.restructuredtext
-		code --install-extension tomphilbin.gruvbox-themes
 		code --install-extension vector-of-bool.gitflow
 		code --install-extension mads-hartmann.bash-ide-vscode
 	else
@@ -79,7 +74,6 @@ if [ ! -f "$HOME/go/offline" ]; then
 	# Install bash language server
 	export npm_config_prefix=${HOME}/.node_modules
 	npm i -g bash-language-server
-	go get -u github.com/saibing/bingo
 fi
 
 echo "#####################"
