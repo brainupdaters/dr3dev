@@ -22,6 +22,8 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
         networks:
             - dr3dev
+        environment:
+            - EDITOR=nvim
         command: bash
 
 networks:
