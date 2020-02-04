@@ -7,8 +7,6 @@ services:
         container_name: godev
         hostname: godev
         domainname: dr3dev.local
-        environment:
-            - DISPLAY=${DISPLAY}
         ipc: host
         volumes:
             - ${PWD}/files/golang/gopath:${HOME}/go
@@ -23,6 +21,7 @@ services:
         networks:
             - dr3dev
         environment:
+            - DISPLAY=${DISPLAY}
             - EDITOR=nvim
         command: bash
 
