@@ -54,8 +54,8 @@ ENV MYUSER=${MYUSER}\
 	TERM=xterm-256color
 
 RUN	groupadd --gid ${MYGID} ${MYUSER} && \
-	groupdel docker && \
-	groupadd --gid ${DOCKERGID} docker && \
+	groupmod --gid 151 git && \
+	groupmod --gid ${DOCKERGID} docker && \
 	useradd --gid ${MYGID} --uid ${MYUID} --home-dir /home/${MYUSER} -m --shell /bin/bash ${MYUSER} && \
 	usermod -aG docker ${MYUSER} && \
 	echo "${MYUSER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${MYUSER} && \

@@ -149,7 +149,7 @@ status:
 	@echo ""
 	@echo "-- dr3dev - Built Images: -------------------------------"
 	@echo ""
-	@docker image ls | grep dr3dev
+	@docker image ls | grep dr3dev || echo -e "No built images\n"
 	@echo ""
 	@echo "-- dr3dev - Running Containers: -------------------------"
 	@echo ""
