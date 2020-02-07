@@ -16,10 +16,23 @@ echo "#####################"
 echo "######## Setting up dotfiles ..."
 echo "#####################"
 
+mkdir -p ${HOME}/.config/nvim
+
 if [ -f "$HOME"/dots/custom/init.vim ]; then
-	mkdir -p ${HOME}/.config/nvim; ln -s ${HOME}/dots/custom/init.vim ${HOME}/.config/nvim/init.vim
+	ln -s ${HOME}/dots/custom/init.vim ${HOME}/.config/nvim/init.vim
 else
-	[ -f "$HOME"/dots/nvim/init.vim ] && mkdir -p ${HOME}/.config/nvim && ln -s ${HOME}/dots/nvim/init.vim ${HOME}/.config/nvim/init.vim
+	if [ ! -f "$HOME"/dots/nvim/init.vim ]; then
+		mkdir -p "$HOME"/dots/nvim
+		echo "call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'tpope/vim-fugitive'
+
+call plug#end()
+
+let g:deoplete#enable_at_startup = 1" >> "$HOME"/dots/nvim/init.vim
+	fi
+	ln -s ${HOME}/dots/nvim/init.vim ${HOME}/.config/nvim/init.vim
 	[ -f "$HOME"/dots/nvim/coc-settings.json ] && ln -s ${HOME}/dots/nvim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
 fi
 
@@ -40,12 +53,10 @@ if [ ! -f "$HOME/go/offline" ]; then
 		echo "#####################"
 		echo "######## Installing NeoVim plugins ..."
 		echo "#####################"
-	# Install Vim Plugins + vim-go binaries
-	#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+		curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 		nvim --headless +qa
 		nvim --headless +PlugInstall +qa
-		nvim --headless "+CocInstall coc-json" +qa
-		nvim --headless +GoInstallBinaries +qa
 	else
 		echo "#####################"
 		echo "######## Skipping ... NeoVim plugins already installed!!! ;)"
@@ -68,7 +79,7 @@ if [ ! -f "$HOME/go/offline" ]; then
 	fi
 
 	echo "#####################"
-	echo "######## Installing/Updating Go & Bash Language servers ..."
+	echo "######## Installing/Updating G Bash Language server ..."
 	echo "#####################"
 
 	# Install bash language server
