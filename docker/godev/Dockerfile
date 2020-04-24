@@ -3,7 +3,7 @@
 FROM archlinux/base:latest AS builder
 
 RUN pacman -Syy && pacman --needed --noconfirm -S sudo git \
-	autoconf automake binutils bison fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make patch pkgconf sed texinfo util-linux which go && \
+	autoconf automake binutils bison fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make patch pkgconf sed texinfo util-linux libffi which go && \
 	useradd --shell /bin/bash --home-dir /build -m builder && \
 	echo "builder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/builder && \
 	chmod 0440 /etc/sudoers.d/builder && \

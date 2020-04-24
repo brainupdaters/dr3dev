@@ -1,6 +1,6 @@
-golang-version ?= 1.13.6
+golang-version ?= 1.13.10
 # golang-arch ?= $(shell uname -m)
-protobuf-version ?= 3.11.2
+protobuf-version ?= 3.11.4
 protobuf-arch ?= $(shell uname -m)
 mariadb-version ?= 10.3
 
