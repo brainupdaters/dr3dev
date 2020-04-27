@@ -2,8 +2,9 @@
 
 FROM archlinux/base:latest AS builder
 
-RUN pacman -Syy && pacman --needed --noconfirm -S sudo git \
-	autoconf automake binutils bison fakeroot file findutils flex gawk gcc gettext grep groff gzip libtool m4 make patch pkgconf sed texinfo util-linux libffi which go && \
+RUN pacman -Syu --noconfirm
+
+RUN pacman -Syy && pacman --needed --noconfirm -S sudo git base-devel go && \
 	useradd --shell /bin/bash --home-dir /build -m builder && \
 	echo "builder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/builder && \
 	chmod 0440 /etc/sudoers.d/builder && \
@@ -20,6 +21,8 @@ LABEL maintainer Didac Oliveira "didac@drlm.org"
 # Install software
 COPY --from=builder /build/*/*.pkg.tar.xz /tmp
 COPY --from=builder /build/endly /usr/local/bin
+
+RUN pacman -Syu --noconfirm
 
 RUN pacman -Syy && \
 	pacman --needed --noconfirm -S sudo git bash-completion neovim python python-neovim npm yarn code otf-fira-code tmux mariadb-clients busybox openssh docker-compose \

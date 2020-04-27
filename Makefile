@@ -1,4 +1,4 @@
-golang-version ?= 1.13.10
+golang-version ?= 1.14.2
 # golang-arch ?= $(shell uname -m)
 protobuf-version ?= 3.11.4
 protobuf-arch ?= $(shell uname -m)
