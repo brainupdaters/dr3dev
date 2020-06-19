@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+    drlm-agent:
+        image: drlm-agent
+        container_name: drlm-agent
+        hostname: drlm-agent
+        domainname: dr3dev.local
+        ipc: host
+        volumes:
+            - ${PWD}/files/tls:/tls
+        networks:
+            - dr3dev
+        extra_hosts:
+          - "godev:172.18.0.5"
+
+networks:
+    dr3dev:
+        external: true

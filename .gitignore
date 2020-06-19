@@ -9,3 +9,7 @@ files/tls/ca/*
 files/tls/mariadb/*
 files/tls/godev/*
 files/node/*
+files/dots/nvim/init.vim
+k8s/kind
+k8s/kubectl
+k8s/nohup.out
