@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core
+  template:
+    metadata:
+      labels:
+        app: core
+    spec:
+      containers:
+      - name: core
+        image: drlm/core:2.0.0
+        volumeMounts:
+          - name: core-toml
+            mountPath: "/etc/drlm"
+            readOnly: true
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 50051
+      volumes:
+        - name: core-toml
+          secret:
+            secretName: core
+            items:
+              - key: core-toml
+                path: core.toml
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: core
+spec:
+  selector:
+    app: core
+  ports:
+  - port: 50501
