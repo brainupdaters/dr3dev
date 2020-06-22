@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mariadb
+  labels:
+    srv: drlm3
 spec:
   selector:
     matchLabels:
@@ -10,6 +12,7 @@ spec:
     metadata:
       labels:
         app: mariadb
+        srv: drlm3
     spec:
       containers:
       - name: mariadb
@@ -36,6 +39,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mariadb
+  labels:
+    app: mariadb
+    srv: drlm3
 spec:
   selector:
     app: mariadb

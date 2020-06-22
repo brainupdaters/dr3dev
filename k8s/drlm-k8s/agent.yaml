@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drlm-agent
+  labels:
+    srv: drlm3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drlm-agent
+  template:
+    metadata:
+      labels:
+        app: drlm-agent
+        srv: drlm3
+    spec:
+      containers:
+      - name: drlm-agent
+        image: didacog/drlm-agent:0.0.6
+        volumeMounts:
+          - name: drlm-agent-toml
+            mountPath: "/etc/drlm"
+            readOnly: false
+          - name: plugins-dir
+            mountPath: "/root/.bin"
+            readOnly: false
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "50m"
+#        ports:
+#        - containerPort: 50051
+      volumes:
+        - name: plugins-dir
+          emptyDir: {}
+        - name: drlm-agent-toml
+          secret:
+            secretName: drlm-agent-toml
+            items:
+            - key: drlm-agent.toml
+              path: agent.toml
+
+#---
+#
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: drlm-core
+#  labels:
+#    app: drlm-core
+#    srv: drlm3
+#spec:
+#  type: NodePort
+#  selector:
+#    app: drlm-core
+#  ports:
+#  - port: 50501
+#    protocol: TCP
+#    targetPort: 50051
+#    nodePort: 30051

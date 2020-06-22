@@ -1,24 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: core
+  name: drlm-core
+  labels:
+    srv: drlm3
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: core
+      app: drlm-core
   template:
     metadata:
       labels:
-        app: core
+        app: drlm-core
+        srv: drlm3
     spec:
       containers:
-      - name: core
-        image: drlm/core:2.0.0
+      - name: drlm-core
+        image: didacog/drlm-core:0.0.6
         volumeMounts:
-          - name: core-toml
+          - name: drlm-core-toml
             mountPath: "/etc/drlm"
-            readOnly: true
+            readOnly: false
         resources:
           limits:
             memory: "128Mi"
@@ -26,21 +29,28 @@ spec:
         ports:
         - containerPort: 50051
       volumes:
-        - name: core-toml
+        - name: drlm-core-toml
           secret:
-            secretName: core
+            secretName: drlm-core-toml
             items:
-              - key: core-toml
-                path: core.toml
+            - key: drlm-core.toml
+              path: core.toml
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: core
+  name: drlm-core
+  labels:
+    app: drlm-core
+    srv: drlm3
 spec:
+  type: NodePort
   selector:
-    app: core
+    app: drlm-core
   ports:
-  - port: 50501
+  - port: 50051
+    protocol: TCP
+    targetPort: 50051
+    nodePort: 30051
