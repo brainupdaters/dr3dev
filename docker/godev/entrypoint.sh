@@ -68,7 +68,8 @@ if [ ! -f "$HOME/go/offline" ]; then
 		echo "######## Installing VSCode extensions ..."
 		echo "#####################"
 	# Install VSCode extensions
-		code --install-extension ms-vscode.Go
+		#code --install-extension ms-vscode.Go
+		code --install-extension golang.Go
 		code --install-extension lextudio.restructuredtext
 		code --install-extension vector-of-bool.gitflow
 		code --install-extension mads-hartmann.bash-ide-vscode

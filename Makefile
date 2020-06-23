@@ -87,7 +87,7 @@ endif
 	GOLANG_VERSION=$(golang-version) docker-compose -f docker/godev/docker-compose.yml run godev
 
 .PHONY: stop
-stop: stop-tls stop-backend stop-godev
+stop: stop-godev stop-backend stop-tls
 
 .PHONY: stop-tls
 stop-tls:

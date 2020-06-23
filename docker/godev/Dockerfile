@@ -25,7 +25,7 @@ COPY --from=builder /build/endly /usr/local/bin
 RUN pacman -Syu --noconfirm
 
 RUN pacman -Syy && \
-	pacman --needed --noconfirm -S sudo git bash-completion neovim python python-neovim npm yarn code otf-fira-code tmux mariadb-clients busybox openssh docker-compose \
+	pacman --needed --noconfirm -S sudo git bash-completion neovim python python-neovim npm yarn code ttf-fira-code tmux mariadb-clients busybox openssh docker-compose \
 	binutils file findutils make sed gawk gcc util-linux grep unzip && \
 	pacman --noconfirm -U /tmp/gitflow-avh.pkg.tar.xz && \
 	pacman --noconfirm -U /tmp/gitflow-bc-avh.pkg.tar.xz && \
