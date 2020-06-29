@@ -15,3 +15,4 @@ k8s/kubectl
 k8s/nohup.out
 k8s/drlm-k8s/secrets/core/drlm-core.toml
 k8s/drlm-k8s/secrets/agent/drlm-agent.toml
+k8s/drlm-k8s/CLI/.log/*

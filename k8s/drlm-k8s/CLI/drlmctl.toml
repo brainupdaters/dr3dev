@@ -7,9 +7,10 @@
   port = 30051
   ssh_keys = []
   ssh_port = 0
+  tls = false
   tkn = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVc3IiOiJhZG1pbiIsIkZpcnN0SXNzdWVkIjoiMjAyMC0wNi0yMlQxOToyNToyNS42MTQ3NjYxMjdaIiwiZXhwIjoxNTkyODU0NTE3fQ.tfydg9_HY1X3qCmHHEj7sG3u8INi-5lxX3_cnBVb7krMSgDfWntLGLJ1NHOtf-41tpz_ms-P4GYI4eeYS_BMTA"
   tkn_expiration = 2020-06-22T21:35:17+02:00
-  tls = false
+
 
 [log]
   file = ".log/drlm/drlmctl.log"
